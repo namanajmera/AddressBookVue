@@ -1,0 +1,317 @@
+<template>
+  <div class="form-content">
+    <form action="#" class="form" onsubmit="save(event)" onreset="reset(event)">
+      <div class="form-head-container">
+        <div class="form-head">PERSON ADDRESS FORM</div>
+        <a>
+          <img
+            src="../assets/cancel_black_24dp.svg"
+            alt="../pages/address_book_home"
+            class="close"
+          />
+        </a>
+      </div>
+
+      <div class="row-content">
+        <label class="label text" for="name">Full Name</label>
+        <input
+          class="input"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name.."
+          required
+        />
+        <error-output class="name-error" for="name"></error-output>
+      </div>
+
+      <div class="row-content">
+        <label class="label text" for="number">Phone Number</label>
+        <input
+          class="input"
+          type="number"
+          id="number"
+          name="number"
+          placeholder="Enter your phone number..."
+          required
+        />
+        <error-output class="phone-error" for="number"></error-output>
+      </div>
+
+      <div class="row-content">
+        <label class="label text" for="address">Address</label>
+        <textarea
+          name="address"
+          id="address"
+          cols="15"
+          rows="15"
+          style="width: 700px; height: 96px"
+          placeholder="Enter your address..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="row-contents sub-address">
+        <div class="state">
+          <label for="state" class="label text">State</label>
+          <select name="state" id="state" class="form-control">
+            <option value="none" selected disabled hidden>
+              Select an Option
+            </option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Andaman and Nicobar Islands">
+              Andaman and Nicobar Islands
+            </option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Dadar and Nagar Haveli">
+              Dadar and Nagar Haveli
+            </option>
+            <option value="Daman and Diu">Daman and Diu</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Puducherry">Puducherry</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+          </select>
+        </div>
+        <div class="city">
+          <label for="city" class="label text">City</label>
+          <select name="city" id="city" class="form-control">
+            <option value="none" selected disabled hidden>
+              Select an Option
+            </option>
+            <option value="Delhi">Delhi</option>
+            <option value="Andaman and Nicobar Islands">Bangalore</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Assam">Ahmedabad</option>
+            <option value="Bihar">Chennai</option>
+            <option value="Chandigarh">Kolkata</option>
+          </select>
+        </div>
+
+        <div class="zipCode">
+          <label for="zip" class="label text">Zip Code</label>
+          <input
+            type="number"
+            name="zipCode"
+            id="zip"
+            class="zipCode"
+            placeholder="Enter zip number..."
+            required
+          />
+          <error-output class="text-error" for="zip"></error-output>
+        </div>
+      </div>
+
+      <div class="button-parent">
+        <div class="sumbit-reset">
+          <button type="submit" class="button sumbitButton">Add</button>
+          <button type="reset" class="resetButton button">Reset</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+<script>
+export default {};
+</script>
+<style>
+.form-content {
+  min-height: calc(100% - 180px);
+  width: 100%;
+  background-color: #f7f7f7;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0px solid green;
+}
+
+.form-head-container {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: ; */
+  width: 100%;
+  padding: 30px 10px;
+  background: #008cff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 1px solid #f5f5f5;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.close {
+  width: 44px;
+  height: 44px;
+  background: 0% 0% no-repeat padding-box;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.form-head {
+  display: block;
+  margin-left: 30%;
+  font: normal normal normal 28px/37px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.form {
+  margin-top: 20px;
+  width: 900px;
+  height: 803px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 1px solid #f5f5f5;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.row-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  margin-top: 25px;
+  margin-bottom: 10px;
+  border: 0px solid green;
+}
+
+.label {
+  min-width: 140px;
+}
+
+label {
+  padding: 12px 12px 12px 50px;
+  margin-left: 30px;
+  display: block;
+}
+
+.text {
+  font-size: 16px;
+  color: #42515f;
+  opacity: 1;
+  font: normal normal normal 18px/24px Roboto;
+}
+
+.text-error {
+  color: red;
+  margin-left: 10px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+input,
+textarea {
+  margin-left: 80px;
+  width: 700px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 4px;
+  resize: vertical;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #bdbdbd;
+  box-shadow: 1px 1px gray;
+  border-radius: 3px;
+  opacity: 1;
+}
+
+select {
+  width: 180px;
+  height: 50px;
+  margin-left: 80px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font: normal normal normal 16px Roboto;
+  letter-spacing: 0px;
+  color: #42515f;
+  background-color: transparent;
+}
+
+.sub-address {
+  display: flex;
+  flex-direction: row;
+}
+
+.zipCode {
+  width: 180px;
+  height: 50px;
+}
+
+.button-parent {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  margin-left: 200px;
+  margin-right: 50px;
+  /* margin-top: 20px; */
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  background: transparent;
+  font-weight: 400;
+  opacity: 1;
+  min-width: 140px;
+  font-size: 15px;
+  padding: 7px 7px;
+  font-family: Roboto;
+  color: #42515f;
+  border: 1px solid #969696;
+  background: #e2e2e2 0% 0% no-repeat padding-box;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sumbitButton {
+  margin-right: 30px;
+}
+
+.cancelButton {
+  padding-top: 8px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.cancelButton:hover,
+.resetButton:hover {
+  background-color: grey;
+}
+
+.sumbitButton:hover {
+  background-color: #82a70c;
+}
+</style>
