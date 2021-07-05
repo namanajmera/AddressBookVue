@@ -1,6 +1,6 @@
 <template>
   <div class="form-content">
-    <form action="#" class="form" onsubmit="save(event)" onreset="reset(event)">
+    <form action="" class="form">
       <div class="form-head-container">
         <div class="form-head">PERSON ADDRESS FORM</div>
         <a>
@@ -19,23 +19,23 @@
           type="text"
           id="name"
           name="name"
+          v-model="form.fullName"
           placeholder="Enter your name.."
           required
         />
-        <error-output class="name-error" for="name"></error-output>
       </div>
 
       <div class="row-content">
         <label class="label text" for="number">Phone Number</label>
         <input
           class="input"
-          type="number"
+          type="text"
           id="number"
           name="number"
+          v-model="form.phoneNumber"
           placeholder="Enter your phone number..."
           required
         />
-        <error-output class="phone-error" for="number"></error-output>
       </div>
 
       <div class="row-content">
@@ -45,6 +45,7 @@
           id="address"
           cols="15"
           rows="15"
+          v-model="form.address"
           style="width: 700px; height: 96px"
           placeholder="Enter your address..."
           required
@@ -54,7 +55,12 @@
       <div class="row-contents sub-address">
         <div class="state">
           <label for="state" class="label text">State</label>
-          <select name="state" id="state" class="form-control">
+          <select
+            name="state"
+            id="state"
+            class="form-control"
+            v-model="form.state"
+          >
             <option value="none" selected disabled hidden>
               Select an Option
             </option>
@@ -102,7 +108,12 @@
         </div>
         <div class="city">
           <label for="city" class="label text">City</label>
-          <select name="city" id="city" class="form-control">
+          <select
+            name="city"
+            id="city"
+            class="form-control"
+            v-model="form.city"
+          >
             <option value="none" selected disabled hidden>
               Select an Option
             </option>
@@ -123,16 +134,18 @@
             name="zipCode"
             id="zip"
             class="zipCode"
+            v-model="form.zip"
             placeholder="Enter zip number..."
             required
           />
-          <error-output class="text-error" for="zip"></error-output>
         </div>
       </div>
 
       <div class="button-parent">
         <div class="sumbit-reset">
-          <button type="submit" class="button sumbitButton">Add</button>
+          <button type="submit" class="button sumbitButton" @click="submit">
+            Add
+          </button>
           <button type="reset" class="resetButton button">Reset</button>
         </div>
       </div>
@@ -140,7 +153,46 @@
   </div>
 </template>
 <script>
-export default {};
+import { HTTP } from "../service/service.js";
+export default {
+  name: "ContactForm",
+  data() {
+    return {
+      form: {
+        fullName: "",
+        phoneNumber: "",
+        address: "",
+        city: "none",
+        state: "none",
+        zip: "",
+      },
+    };
+  },
+  methods: {
+    submit(event) {
+      const data = {
+        fullName: this.form.fullName,
+        phoneNumber: this.form.phoneNumber,
+        address: this.form.address,
+        city: this.form.city,
+        state: this.form.state,
+        zip: this.form.zip,
+      };
+      event.preventDefault();
+      console.log(data);
+      HTTP.post("/contact", data)
+        .then((result) => {
+          console.log(result);
+          this.$router.push({
+            name: "MainContactList",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 <style>
 .form-content {

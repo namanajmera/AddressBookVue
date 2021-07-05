@@ -1,25 +1,5 @@
 <template>
   <div class="main-content">
-    <div class="header-contain">
-      <div class="address-text-details">
-        Person Details
-        <div class="address-count">10</div>
-      </div>
-      <div class="search">
-        <img
-          src="../assets/person_search_black_24dp.svg"
-          alt=""
-          id="search-icon"
-        />
-      </div>
-      <a class="add-button">
-        <img
-          src="../assets/person_add_black_24dp.svg"
-          class="plus-button"
-          alt=""
-        />Add User</a
-      >
-    </div>
     <div class="table-main">
       <table class="table" id="display">
         <tr>
@@ -31,7 +11,7 @@
           <th>Phone Number</th>
           <th>Actions</th>
         </tr>
-        <tr v-for="contact in Contacts" :key="contact.contactId">
+        <tr v-for="contact in Contacts" :key="contact.id">
           <td>{{ contact.fullName }}</td>
           <td>{{ contact.address }}</td>
           <td>{{ contact.city }}</td>
@@ -40,14 +20,14 @@
           <td>{{ contact.phoneNumber }}</td>
           <td>
             <img
-              id="${contact.id}"
+              :id="contact.id"
               src="../assets/delete_black_24dp.svg"
               alt="delete"
               class="actions"
               onclick="remove(this)"
             />
             <img
-              id="${contact.id}"
+              :id="contact.id"
               src="../assets/edit_black_24dp.svg"
               alt="edit"
               class="actions"
@@ -161,7 +141,6 @@ export default {
   cursor: pointer;
   text-decoration: none;
 }
-
 /* Table Content */
 
 .table-main {
