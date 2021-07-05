@@ -1,0 +1,22 @@
+{
+   "contact": [
+      {
+         "contactId": 1,
+         "fullName": "Jeff Bezoz",
+         "phoneNumber": "+91 8664263212",
+         "address": "Home Sweet Homesssss",
+         "city": "Jaipur",
+         "state": "Rajasthan",
+         "zip": "303901"
+      },
+      {
+         "contactId": 2,
+         "fullName": "Naman Ajmera",
+         "phoneNumber": "+91 8696696426",
+         "address": "Ajmera Bhawan",
+         "city": "Jaipur",
+         "state": "Rajasthan",
+         "zip": "303901"
+      }
+   ]
+}

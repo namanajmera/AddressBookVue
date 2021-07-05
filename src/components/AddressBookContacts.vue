@@ -31,13 +31,13 @@
           <th>Phone Number</th>
           <th>Actions</th>
         </tr>
-        <tr>
-          <td>Naman Ajmera</td>
-          <td>Ward No 9 Ajmera Bhawan Chaksu</td>
-          <td>Jaipur</td>
-          <td>Rajasthan</td>
-          <td>303901</td>
-          <td>8696696426</td>
+        <tr v-for="contact in Contacts" :key="contact.contactId">
+          <td>{{ contact.fullName }}</td>
+          <td>{{ contact.address }}</td>
+          <td>{{ contact.city }}</td>
+          <td>{{ contact.state }}</td>
+          <td>{{ contact.zip }}</td>
+          <td>{{ contact.phoneNumber }}</td>
           <td>
             <img
               id="${contact.id}"
@@ -60,8 +60,29 @@
   </div>
 </template>
 <script>
+import { HTTP } from "../service/service.js";
 export default {
   name: "AddressBookContact",
+  data() {
+    return {
+      Contacts: [],
+    };
+  },
+  mounted() {
+    this.getContacts();
+  },
+  methods: {
+    getContacts() {
+      HTTP.get("/contact")
+        .then((result) => {
+          this.Contacts = result.data;
+          console.log(result.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 <style>
