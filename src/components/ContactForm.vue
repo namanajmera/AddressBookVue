@@ -119,11 +119,11 @@
               Select an Option
             </option>
             <option value="Delhi">Delhi</option>
-            <option value="Andaman and Nicobar Islands">Bangalore</option>
+            <option value="Bangalore">Bangalore</option>
             <option value="Hyderabad">Hyderabad</option>
             <option value="Jaipur">Jaipur</option>
-            <option value="Assam">Ahmedabad</option>
-            <option value="Bihar">Chennai</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Chennai">Chennai</option>
             <option value="Kolkata">Kolkata</option>
           </select>
         </div>

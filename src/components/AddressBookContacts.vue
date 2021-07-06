@@ -1,7 +1,10 @@
 <template>
   <div class="main-content">
     <div class="header-contain">
-      <div class="address-text-details">Person Details</div>
+      <div class="address-text-details">
+        Person Details
+        <div class="address-count">{{ totalContact }}</div>
+      </div>
       <div class="search">
         <!-- <img
           src="../assets/person_search_black_24dp.svg"
@@ -73,9 +76,11 @@ export default {
     return {
       Contacts: [],
       searchNameKeyword: undefined,
+      totalContact: "0",
     };
   },
   mounted() {
+    this.count();
     if (this.searchNameKeyword == undefined) {
       this.getContacts();
     } else {
@@ -109,6 +114,7 @@ export default {
         .then((result) => {
           console.log(result);
           this.getContacts();
+          this.count();
         })
         .catch((err) => {
           console.log(err);
@@ -124,6 +130,16 @@ export default {
           },
         },
       });
+    },
+    count() {
+      HTTP.get("/addressbook/count")
+        .then((result) => {
+          this.totalContact = result.data.data;
+          console.log(result.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
