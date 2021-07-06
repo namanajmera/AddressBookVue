@@ -205,7 +205,7 @@ export default {
       };
       event.preventDefault();
       console.log(data);
-      HTTP.post("/contact", data)
+      HTTP.post("/addressbook/post/create", data)
         .then((result) => {
           console.log(result);
           this.$router.push({
@@ -227,7 +227,10 @@ export default {
       };
       event.preventDefault();
       console.log(this.data.result);
-      HTTP.put("/contact/" + this.data.result.id, contactData)
+      HTTP.put(
+        "/addressbook/put/update/" + this.data.result.contactId,
+        contactData
+      )
         .then((result) => {
           console.log("update successfully..!!! ", result);
           this.$router.push({

@@ -11,7 +11,7 @@
           <th>Phone Number</th>
           <th>Actions</th>
         </tr>
-        <tr v-for="contact in Contacts" :key="contact.id">
+        <tr v-for="contact in Contacts" :key="contact.contactId">
           <td>{{ contact.fullName }}</td>
           <td>{{ contact.address }}</td>
           <td>{{ contact.city }}</td>
@@ -20,14 +20,14 @@
           <td>{{ contact.phoneNumber }}</td>
           <td>
             <img
-              :id="contact.id"
+              :id="contact.contactId"
               src="../assets/delete_black_24dp.svg"
               alt="delete"
               class="actions"
-              @click="remove(contact.id)"
+              @click="remove(contact.contactId)"
             />
             <img
-              :id="contact.id"
+              :id="contact.contactId"
               src="../assets/edit_black_24dp.svg"
               alt="edit"
               class="actions"
@@ -53,17 +53,17 @@ export default {
   },
   methods: {
     getContacts() {
-      HTTP.get("/contact")
+      HTTP.get("/addressbook")
         .then((result) => {
-          this.Contacts = result.data;
-          console.log(result.data);
+          this.Contacts = result.data.data;
+          console.log(result.data.data);
         })
         .catch((err) => {
           console.log(err);
         });
     },
     remove(id) {
-      HTTP.delete("/contact/" + id)
+      HTTP.delete("/addressbook/delete/" + id)
         .then((result) => {
           console.log(result);
           this.getContacts();
