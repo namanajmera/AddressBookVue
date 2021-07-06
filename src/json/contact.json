@@ -10,21 +10,21 @@
       "zip": "303901"
     },
     {
-      "id": 2,
       "fullName": "Naman Ajmera",
-      "phoneNumber": "+91 8696696426",
-      "address": "Ajmera Bhawan",
-      "city": "Jaipur",
-      "state": "Rajasthan",
-      "zip": "303901"
-    },
-    {
-      "fullName": "Naman Ajmera",
-      "phoneNumber": "08696696426",
+      "phoneNumber": "8696696426",
       "address": "AJMERA BHAWAN WARD NO 9 NEAR SABJI MANDI CHAKSU",
       "city": "Jaipur",
       "state": "Rajasthan",
       "zip": "303901",
+      "id": 2
+    },
+    {
+      "fullName": "Anuradha Dhuria",
+      "phoneNumber": "9876543214",
+      "address": "Hello There",
+      "city": "Delhi",
+      "state": "Delhi",
+      "zip": "543654",
       "id": 3
     }
   ]

@@ -3,13 +3,14 @@
     <form action="" class="form">
       <div class="form-head-container">
         <div class="form-head">PERSON ADDRESS FORM</div>
-        <a>
-          <img
-            src="../assets/cancel_black_24dp.svg"
-            alt="../pages/address_book_home"
-            class="close"
-          />
-        </a>
+        <router-link to="/"
+          ><a>
+            <img
+              src="../assets/cancel_black_24dp.svg"
+              alt="../pages/address_book_home"
+              class="close"
+            /> </a
+        ></router-link>
       </div>
 
       <div class="row-content">
@@ -123,7 +124,7 @@
             <option value="Jaipur">Jaipur</option>
             <option value="Assam">Ahmedabad</option>
             <option value="Bihar">Chennai</option>
-            <option value="Chandigarh">Kolkata</option>
+            <option value="Kolkata">Kolkata</option>
           </select>
         </div>
 
@@ -143,7 +144,19 @@
 
       <div class="button-parent">
         <div class="sumbit-reset">
-          <button type="submit" class="button sumbitButton" @click="submit">
+          <button
+            class="button sumbitButton"
+            @click="update"
+            v-if="this.data != undefined && this.data.type == 'update'"
+          >
+            Update
+          </button>
+          <button
+            type="submit"
+            class="button sumbitButton"
+            @click="submit"
+            v-else
+          >
             Add
           </button>
           <button type="reset" class="resetButton button">Reset</button>
@@ -156,6 +169,18 @@
 import { HTTP } from "../service/service.js";
 export default {
   name: "ContactForm",
+  props: ["data"],
+  mounted() {
+    if (this.data != undefined && this.data.type == "update") {
+      console.log(this.data);
+      this.form.fullName = this.data.result.fullName;
+      this.form.phoneNumber = this.data.result.phoneNumber;
+      this.form.address = this.data.result.address;
+      this.form.city = this.data.result.city;
+      this.form.state = this.data.result.state;
+      this.form.zip = this.data.result.zip;
+    }
+  },
   data() {
     return {
       form: {
@@ -183,6 +208,28 @@ export default {
       HTTP.post("/contact", data)
         .then((result) => {
           console.log(result);
+          this.$router.push({
+            name: "MainContactList",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    update(event) {
+      const contactData = {
+        fullName: this.form.fullName,
+        phoneNumber: this.form.phoneNumber,
+        address: this.form.address,
+        city: this.form.city,
+        state: this.form.state,
+        zip: this.form.zip,
+      };
+      event.preventDefault();
+      console.log(this.data.result);
+      HTTP.put("/contact/" + this.data.result.id, contactData)
+        .then((result) => {
+          console.log("update successfully..!!! ", result);
           this.$router.push({
             name: "MainContactList",
           });

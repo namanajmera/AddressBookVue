@@ -31,7 +31,7 @@
               src="../assets/edit_black_24dp.svg"
               alt="edit"
               class="actions"
-              onclick="update(this)"
+              @click="update(contact)"
             />
           </td>
         </tr>
@@ -71,6 +71,17 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    update(data) {
+      this.$router.push({
+        name: "MainForm",
+        params: {
+          data: {
+            result: data,
+            type: "update",
+          },
+        },
+      });
     },
   },
 };
