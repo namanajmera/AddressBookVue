@@ -24,7 +24,7 @@
               src="../assets/delete_black_24dp.svg"
               alt="delete"
               class="actions"
-              onclick="remove(this)"
+              @click="remove(contact.id)"
             />
             <img
               :id="contact.id"
@@ -57,6 +57,16 @@ export default {
         .then((result) => {
           this.Contacts = result.data;
           console.log(result.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    remove(id) {
+      HTTP.delete("/contact/" + id)
+        .then((result) => {
+          console.log(result);
+          this.getContacts();
         })
         .catch((err) => {
           console.log(err);

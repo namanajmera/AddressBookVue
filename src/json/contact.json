@@ -26,15 +26,6 @@
       "state": "Rajasthan",
       "zip": "303901",
       "id": 3
-    },
-    {
-      "fullName": "Anuradha Dhuria",
-      "phoneNumber": "9876543214",
-      "address": "Home Sweet Home",
-      "city": "Delhi",
-      "state": "Delhi",
-      "zip": "543654",
-      "id": 4
     }
   ]
 }
