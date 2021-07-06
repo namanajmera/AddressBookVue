@@ -1,5 +1,31 @@
 <template>
   <div class="main-content">
+    <div class="header-contain">
+      <div class="address-text-details">Person Details</div>
+      <div class="search">
+        <!-- <img
+          src="../assets/person_search_black_24dp.svg"
+          alt=""
+          id="search-icon"
+        /> -->
+        <input
+          type="search"
+          id="searchBox"
+          placeholder="search content"
+          @input="searchName"
+          v-model="searchNameKeyword"
+        />
+      </div>
+      <router-link to="/addContact"
+        ><a class="add-button">
+          <img
+            src="../assets/person_add_black_24dp.svg"
+            class="plus-button"
+            alt=""
+          />Add User</a
+        ></router-link
+      >
+    </div>
     <div class="table-main">
       <table class="table" id="display">
         <tr>
@@ -46,12 +72,28 @@ export default {
   data() {
     return {
       Contacts: [],
+      searchNameKeyword: undefined,
     };
   },
   mounted() {
-    this.getContacts();
+    if (this.searchNameKeyword == undefined) {
+      this.getContacts();
+    } else {
+      this.searchName();
+    }
   },
   methods: {
+    searchName() {
+      HTTP.get("/addressbook/get/search/" + this.searchNameKeyword)
+        .then((result) => {
+          this.Contacts = result.data.data;
+          console.log(result.data.data);
+          console.log(this.searchNameKeyword);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getContacts() {
       HTTP.get("/addressbook")
         .then((result) => {
@@ -87,6 +129,9 @@ export default {
 };
 </script>
 <style>
+a {
+  text-decoration: none;
+}
 .main-content {
   display: flex;
   flex-direction: column;
@@ -122,16 +167,33 @@ export default {
   text-align: center;
   display: inline-block;
 }
-
+#searchBox {
+  background-image: url("../assets/person_search_black_24dp.svg");
+  background-position: center;
+  outline: none;
+  border-radius: 28px;
+  border: 0px;
+  width: 50px;
+  height: 50px;
+  /* opacity: 0.8; */
+  margin-left: -0.5px;
+  transition: width 2s;
+}
+#searchBox:hover {
+  width: 200px;
+  height: 55px;
+  background-image: none;
+}
 .search {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 1px 3px #00000029;
-  border-radius: 28px;
+  justify-content: flex-start;
+  /* background: #ffffff 0% 0% no-repeat padding-box; */
+  padding: 20px;
+  /* box-shadow: 0px 1px 3px #00000029; */
+  /* border-radius: 28px; */
   opacity: 1;
-  width: 77px;
+  /* width: 250px; */
   height: 55px;
   margin-left: 750px;
 }
