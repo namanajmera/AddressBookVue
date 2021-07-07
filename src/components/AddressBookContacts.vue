@@ -18,6 +18,9 @@
           @input="searchName"
           v-model="searchNameKeyword"
         />
+        <button id="reload" @click="reload">
+          <img src="../assets/reload.png" alt="" />
+        </button>
       </div>
       <router-link to="/addContact"
         ><a class="add-button">
@@ -80,7 +83,7 @@ export default {
     };
   },
   mounted() {
-    this.count();
+    // this.count();
     if (this.searchNameKeyword == undefined) {
       this.getContacts();
     } else {
@@ -88,22 +91,28 @@ export default {
     }
   },
   methods: {
+    reload() {
+      this.getContacts();
+    },
     searchName() {
       HTTP.get("/addressbook/get/search/" + this.searchNameKeyword)
         .then((result) => {
           this.Contacts = result.data.data;
           console.log(result.data.data);
           console.log(this.searchNameKeyword);
+          this.totalContact = this.Contacts.length;
         })
         .catch((err) => {
           console.log(err);
         });
+      console.log("Length", this.Contacts.length);
     },
     getContacts() {
       HTTP.get("/addressbook")
         .then((result) => {
           this.Contacts = result.data.data;
           console.log(result.data.data);
+          this.totalContact = this.Contacts.length;
         })
         .catch((err) => {
           console.log(err);
@@ -131,16 +140,6 @@ export default {
         },
       });
     },
-    count() {
-      HTTP.get("/addressbook/count")
-        .then((result) => {
-          this.totalContact = result.data.data;
-          console.log(result.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   },
 };
 </script>
@@ -162,7 +161,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 83%;
   margin: 0 auto;
   padding-bottom: 25px;
 }
@@ -185,21 +184,21 @@ a {
 }
 #searchBox {
   background-image: url("../assets/person_search_black_24dp.svg");
-  background-position: center;
+  background-position: right;
   outline: none;
   border-radius: 28px;
   border: 0px;
-  width: 50px;
+  width: 170px;
   height: 50px;
   /* opacity: 0.8; */
   margin-left: -0.5px;
   transition: width 2s;
 }
-#searchBox:hover {
-  width: 200px;
+/* #searchBox:hover {
+  width: 170px;
   height: 55px;
   background-image: none;
-}
+} */
 .search {
   display: flex;
   align-items: center;
@@ -217,6 +216,16 @@ a {
 #search-icon {
   width: 27px;
   height: 27px;
+}
+
+#reload {
+  border: none;
+  background-color: #f7f7f7;
+  /* margin-left: 10px; */
+}
+#reload img {
+  width: 30px;
+  height: 30px;
 }
 
 .plus-button {
